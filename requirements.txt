@@ -1,0 +1,21 @@
+# Data manipulation and analysis
+pandas
+numpy
+
+# Visualization
+matplotlib
+seaborn
+
+# Machine Learning models and utilities
+scikit-learn
+
+# Dimensionality reduction for visualization (optional)
+umap-learn
+
+# Jupyter Notebook (optional, for EDA)
+jupyterlab
+
+# Performance monitoring (optional)
+tqdm
+
+geopy

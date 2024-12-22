@@ -1,0 +1,53 @@
+# Python bytecode files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Mac system files
+.DS_Store
+
+# Logs
+*.log
+
+# Python eggs
+*.egg
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Coverage reports
+.coverage
+.coverage.*
+nosetests.xml
+*.cover
+*.hypothesis/
+
+# IDE and editor folders (PyCharm, VSCode, etc.)
+.vscode/
+.idea/
+
+
+# Model files (optional, you can modify this depending on where your models are stored)
+models/
+*.h5
+*.pkl
+*.joblib
+
+# Output of training (optional)
+output/
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*.swo
