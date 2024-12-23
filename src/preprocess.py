@@ -1,11 +1,12 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from sklearn.preprocessing import MinMaxScaler
 from geopy.distance import geodesic
 import os
 
 # Constants
-INPUT_FILE = 'data/data.csv'
+INPUT_FILE = 'data/raw/data.csv'
 OUTPUT_DIR = 'data/processed'
 TRAIN_RATIO = 0.7
 VALIDATION_RATIO = 0.15
@@ -37,7 +38,7 @@ def preprocess_data(data):
         end = (row['Final latitude'], row['Final longitude'])
         return geodesic(start, end).kilometers
 
-    data['Distance'] = data.apply(calculate_distance, axis=1)
+    data.loc[:, 'Distance'] = data.apply(calculate_distance, axis=1)
 
     # Add Traffic Level (Low, Medium, High) as target label
     def traffic_label(avg_speed):
@@ -48,11 +49,11 @@ def preprocess_data(data):
         else:
             return 'High Traffic'
 
-    data['TrafficLevel'] = data['Avg_Speed'].apply(traffic_label)
+    data.loc[:, 'TrafficLevel'] = data['Avg_Speed'].apply(traffic_label)
 
     # Encode Categorical Features
     categorical_columns = ['DayofWeek', 'TimeRange', 'Month']
-    encoder = OneHotEncoder(sparse=False)
+    encoder = OneHotEncoder(sparse_output=False)
     encoded_cats = pd.DataFrame(encoder.fit_transform(data[categorical_columns]),
                                 columns=encoder.get_feature_names_out(categorical_columns))
 
@@ -60,7 +61,11 @@ def preprocess_data(data):
     data = pd.concat([data.drop(categorical_columns, axis=1), encoded_cats], axis=1)
 
     # Normalize Numerical Features
-    scaler = StandardScaler()
+    # scaler = StandardScaler()
+    # numerical_columns = ['Mileage', 'total_time', 'Avg_Speed', 'Beginning Time', 'Distance']
+    # data[numerical_columns] = scaler.fit_transform(data[numerical_columns])
+
+    scaler = MinMaxScaler()
     numerical_columns = ['Mileage', 'total_time', 'Avg_Speed', 'Beginning Time', 'Distance']
     data[numerical_columns] = scaler.fit_transform(data[numerical_columns])
 

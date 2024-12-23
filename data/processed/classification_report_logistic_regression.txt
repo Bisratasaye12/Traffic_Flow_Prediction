@@ -1,0 +1,9 @@
+                precision    recall  f1-score   support
+
+  High Traffic       0.67      0.84      0.75      3390
+   Low Traffic       0.90      0.69      0.78      6421
+Medium Traffic       0.80      0.85      0.82     11296
+
+      accuracy                           0.80     21107
+     macro avg       0.79      0.79      0.78     21107
+  weighted avg       0.81      0.80      0.80     21107
